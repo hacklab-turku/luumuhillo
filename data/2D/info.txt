@@ -1,1 +1,3 @@
-grafiikkojen "origin on 15,28
+grafiikkojen "origin" on
+32x32: 15,28
+64x64: 31,56
