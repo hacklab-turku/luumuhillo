@@ -36,13 +36,18 @@ void Scene::init()
     mainview = ViewPtr(new sf::View(sf::FloatRect(0, 0,  game.getResolution().y*aspect_ratio, game.getResolution().y)));
     initialized = true;
 
+	gameMap.generate();
+
     // For derps, play a sound
     game.getAudioHandler()->playsound("biisi");
 }
 
 void Scene::render()
-{
+{   
     game.getRenderWindow()->setView(*mainview);
+
+	gameMap.render(mainview);
+
     // March through the graphics container and render graphics
     for (auto iter = graphics.begin(); iter != graphics.end(); iter++)
     {

@@ -30,7 +30,7 @@ int SceneHandler::init()
     sceneContainer.push_back(scene1);
     activeScene = scene1;
 
-    scene1->appendGraphics(game.getDataStorage()->getSprite("logo"));
+   // scene1->appendGraphics(game.getDataStorage()->getSprite("logo"));
 
     return 0;
 }
