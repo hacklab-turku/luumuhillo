@@ -46,7 +46,7 @@ void Scene::render()
 {
     game.getRenderWindow()->setView(*mainview);
 
-	gameMap.render();
+	gameMap.render(mainview);
 
     // March through the graphics container and render graphics
     for (auto iter = graphics.begin(); iter != graphics.end(); iter++)
