@@ -31,6 +31,18 @@ int DataStorage::loadAllData()
 }
 
 /**
+* Loads a new sprite from a filepath
+* Creates a sf::Texture and stores it in textureMap
+* Then creates a sprite from the texture using its entire size
+* Returns -1 if error, 0 if success
+*/
+int DataStorage::loadSprite(std::string name, std::string path)
+{
+    loadTextureAndStoreSprite(name, path);
+    return getSprite(name);
+}
+
+/**
 * Loads a new texture from the given path and stores the produced Texture in the textureContainer as a shared_ptr
 * The texture is stored based on the given name
 * Returns -1 if error, 0 if success
