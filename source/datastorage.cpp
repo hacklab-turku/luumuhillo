@@ -16,7 +16,11 @@ DataStorage::DataStorage()
 int DataStorage::loadInitialData()
 {
     loadTextureAndStoreSprite("logo", "data/2D/engine_logo.png");
+	loadTextureAndStoreSprite("grass", "data/2D/maa.png");
+	loadTextureAndStoreSprite("plumTree", "data/2D/puu.png");
+
     loadSound("biisi", "data/audio/biisi.ogg");
+
     
     return 0;
 }
@@ -36,7 +40,7 @@ int DataStorage::loadAllData()
 * Then creates a sprite from the texture using its entire size
 * Returns -1 if error, 0 if success
 */
-int DataStorage::loadSprite(std::string name, std::string path)
+SpritePtr DataStorage::loadSprite(std::string name, std::string path)
 {
     loadTextureAndStoreSprite(name, path);
     return getSprite(name);
