@@ -14,6 +14,7 @@ private:
 public:
     DataStorage();
 
+    int loadSprite(std::string name, std::string path);
     int storeSprite(std::string name, std::shared_ptr<sf::Sprite> s);
     int loadTexture(std::string name, std::string path);
     int loadTextureAndStoreSprite(std::string name, std::string path);
