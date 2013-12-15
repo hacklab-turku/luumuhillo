@@ -155,7 +155,7 @@ void map::genBoulders(int x, int y)	//generate a wall of boulders
 
 bool map::isSolid(int x, int y)
 {
-	if (x < 0 || x > MAP_SIZE_X || y < 0 || y > MAP_SIZE_Y)
+	if (x < 0 || x >= MAP_SIZE_X || y < 0 || y >= MAP_SIZE_Y)
 		return true;
 	if(world[x][y]==BOULDER) return true; 
 	if(world[x][y]==PINE_TREE) return true;
@@ -165,7 +165,7 @@ bool map::isSolid(int x, int y)
 
 char map::getCellData(int x, int y)
 {
-	if (x < 0 || x > MAP_SIZE_X || y < 0 || y > MAP_SIZE_Y)
+	if (x < 0 || x >= MAP_SIZE_X || y < 0 || y >= MAP_SIZE_Y)
 		return 'E'; //Off edge
 	return world[x][y];
 
