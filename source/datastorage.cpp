@@ -18,6 +18,7 @@ int DataStorage::loadInitialData()
     loadTextureAndStoreSprite("logo", "data/2D/engine_logo.png");
 	loadTextureAndStoreSprite("grass", "data/2D/ground.png");
 	loadTextureAndStoreSprite("plumTree", "data/2D/tree.png");
+	loadTextureAndStoreSprite("bloomingPlumTree", "data/2D/bloomingtree.png");
 	loadTextureAndStoreSprite("maturePlumTree", "data/2D/maturetree.png");
 	loadTextureAndStoreSprite("pineTree", "data/2D/pine.png");
 	loadTextureAndStoreSprite("boulder", "data/2D/boulder.png");
