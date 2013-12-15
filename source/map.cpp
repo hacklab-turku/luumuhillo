@@ -46,19 +46,19 @@ void map::render(ViewPtr view)
 
 		switch (world[x][y]){
 			case PLUM_TREE:
-				plumTree->setPosition(32 * x, 32 * y - 16);
+				plumTree->setPosition(32 * x, 32 * y - TREE_OFFSET);
 				game.getRenderWindow()->draw(*plumTree);
 				break;
 			case BLOOMING_PLUM_TREE:
-				bloomingPlumTree->setPosition(32 * x, 32 * y - 16);
+				bloomingPlumTree->setPosition(32 * x, 32 * y - TREE_OFFSET);
 				game.getRenderWindow()->draw(*bloomingPlumTree);
 				break;
 			case MATURE_PLUM_TREE:
-				maturePlumTree->setPosition(32 * x, 32 * y - 16);
+				maturePlumTree->setPosition(32 * x, 32 * y - TREE_OFFSET);
 				game.getRenderWindow()->draw(*maturePlumTree);
 				break;
 			case PINE_TREE:
-				pineTree->setPosition(32 * x, 32 * y - 16);
+				pineTree->setPosition(32 * x, 32 * y - TREE_OFFSET);
 				game.getRenderWindow()->draw(*pineTree);
 				break;
 			case BOULDER:
@@ -72,7 +72,7 @@ void map::render(ViewPtr view)
 				}
 				else
 				{
-					boulder->setPosition(32 * x, 32 * y);
+					boulder->setPosition(32 * x, 32 * y - SMALL_OFFSET);
 					game.getRenderWindow()->draw(*boulder);
 				}
 				break;

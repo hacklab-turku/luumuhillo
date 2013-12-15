@@ -13,40 +13,43 @@ Entity::Entity(std::string name, int x, int y) {
     x_ = x;
     y_ = y;
 
+    drawX_ = x * 32;
+    drawY_ = y * 32;
+
     blomCount_ = 0;
     visible_ = true;
 }
 
 void Entity::Render(ViewPtr view) {
-    sprite_->setPosition(x_, y_);
+    sprite_->setPosition(drawX_, drawY_);
     game.getRenderWindow()->draw(*sprite_);
 }
 
 bool Entity::HandleInput() {
-	bool didMove = false;
+   bool didMove = false;
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-        x_ -= 32;
-		didMove = true;
-        // What happens when X is constantly down
+        x_--;
+	drawX_ -= 32;
+	didMove = true;
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-        x_ += 32;
-		didMove = true;
-        // What happens when X is constantly down
+        x_++;
+	drawX_ += 32;
+	didMove = true;
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-        y_ -= 32;
-		didMove = true;
-        // What happens when X is constantly down
+        y_--;
+	drawY_ -= 32;
+	didMove = true;
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-        y_ += 32;
-		didMove = true;
-        // What happens when X is constantly down
+        y_++;
+	drawY_ += 32;
+	didMove = true;
     }
-	return didMove;
+    return didMove;
 }
