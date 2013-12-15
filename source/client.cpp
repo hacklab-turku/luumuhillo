@@ -1,7 +1,7 @@
 #include "client.hpp"
 #include "game.hpp"
-#include "serverinfo.hpp"
 #include <iostream>
+#include "server.hpp"
 
 Client::Client()
 {
@@ -13,8 +13,8 @@ Client::Client()
 */
 int Client::request_port()
 {
-    remote_master_port = game.getServerInfo()->master_port;
-    remote_master_address = game.getServerInfo()->master_address;
+    remote_master_port = game.getServer()->giveMasterPort();
+    remote_master_address = game.getServer()->giveMasterAddress();
 
     return -1;
 }
