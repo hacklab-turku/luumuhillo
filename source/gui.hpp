@@ -10,8 +10,8 @@ class gui {
 public:
 	gui();
 	void init();
-	void render();
-	void setPosition(int x, int y);
+	void render(ViewPtr view);
+	void setPlayerPosition(int x, int y);
 	void setScore(int score);
 
 private:
