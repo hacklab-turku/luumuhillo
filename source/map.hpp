@@ -13,10 +13,13 @@ public:
 	char getCellData(int x, int y);
 	bool isSolid(int x, int y);
 	void generate();
+	void work();
+	void setDrawGrid(bool draw) {drawGrid = draw;}
 
 
 private:
 	char world[MAP_SIZE_X][MAP_SIZE_Y];
+	bool drawGrid;
 
 };
 

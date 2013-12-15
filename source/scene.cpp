@@ -26,6 +26,8 @@ void Scene::work()
         (*iter)->setPosition(tempPos);
     }
 
+    gameMap.work();   //modify the map
+
     // Then render
     render();
 }
