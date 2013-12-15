@@ -4,6 +4,8 @@
 #include "toolbox.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+#include "entity.hpp"
+#include "map.hpp"
 
 Scene::Scene(std::string n)
 {
@@ -36,6 +38,8 @@ void Scene::init()
     mainview = ViewPtr(new sf::View(sf::FloatRect(0, 0,  game.getResolution().y*aspect_ratio, game.getResolution().y)));
     initialized = true;
 
+//    Entity player("luumunkeraaja", 10, 10);
+
 	gameMap.generate();
 
     // For derps, play a sound
@@ -47,6 +51,7 @@ void Scene::render()
     game.getRenderWindow()->setView(*mainview);
 
 	gameMap.render(mainview);
+//    player.Render(mainview);
 
     // March through the graphics container and render graphics
     for (auto iter = graphics.begin(); iter != graphics.end(); iter++)

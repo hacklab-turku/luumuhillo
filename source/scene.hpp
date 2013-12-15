@@ -22,8 +22,6 @@ private:
     sf::Vector2f display_offset;
     float aspect_ratio;
 
-	map gameMap;
-
     bool initialized;
 public:
     Scene(std::string n);

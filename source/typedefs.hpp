@@ -14,6 +14,8 @@ class Toolbox;
 class SceneHandler;
 class Scene;
 class Audio;
+class map;
+
 
 // Typedef manager classes
 typedef std::shared_ptr<ConfigReader> ConfigReaderPtr;
