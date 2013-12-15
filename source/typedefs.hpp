@@ -17,13 +17,10 @@ class Toolbox;
 class SceneHandler;
 class Scene;
 class Audio;
-<<<<<<< HEAD
 class map;
 
-=======
 class Server;
 class ServerSocket;
->>>>>>> 0eb9aba1b1a3ef8101f873da733d60ad00a35c6f
 
 // Typedef manager classes
 typedef std::shared_ptr<ConfigReader> ConfigReaderPtr;
