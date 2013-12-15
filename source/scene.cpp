@@ -8,6 +8,7 @@
 #include "map.hpp"
 #include <random>
 
+
 Scene::Scene(std::string n)
 {
     scenetime = 0;
@@ -44,6 +45,14 @@ void Scene::work()
 		}
     } 
 
+
+
+    static int bearTime;
+    if(bearTime < scenetime){
+		bearTime = scenetime + 10;
+		angryBear.findTo(player->GetX(), player->GetY());
+    } 
+
     gameMap.work();   //modify the map
 
     gameGui.setPlayerPosition(player->GetX(), player->GetY());
@@ -62,6 +71,7 @@ void Scene::init()
     initialized = true;
 
     player = new Entity("luumunkeraaja", 0, 0);
+	angryBear.setPosition(20, 20);
  
     gameMap.generate();
     gameGui.init();
@@ -78,6 +88,7 @@ void Scene::render()
 
     gameMap.render(mainview);
     player->Render(mainview);
+	angryBear.render();
 
     // March through the graphics container and render graphics
     for (auto iter = graphics.begin(); iter != graphics.end(); iter++)

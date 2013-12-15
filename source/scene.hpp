@@ -8,6 +8,7 @@
 #include "map.hpp"
 #include "entity.hpp"
 #include "gui.hpp"
+#include "bear.hpp"
 
 class Scene
 {
@@ -28,7 +29,7 @@ private:
     map gameMap;
     Entity *player;
 	gui gameGui;
-
+	bear angryBear;
 
     bool initialized;
 
