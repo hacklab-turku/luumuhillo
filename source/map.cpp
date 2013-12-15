@@ -28,7 +28,9 @@ void map::render(ViewPtr view)
 	if (maxY > MAP_SIZE_Y) maxY = MAP_SIZE_Y;
 
 	SpritePtr plumTree = game.getDataStorage()->getSprite("plumTree");
+	SpritePtr pineTree = game.getDataStorage()->getSprite("pineTree");
 	SpritePtr grass = game.getDataStorage()->getSprite("grass");
+	SpritePtr boulder = game.getDataStorage()->getSprite("boulder");
 
 
 	for (int x = minX; x < maxX; x++){
@@ -42,6 +44,15 @@ void map::render(ViewPtr view)
 				plumTree->setPosition(32 * x, 32 * y - 16);
 				game.getRenderWindow()->draw(*plumTree);
 				break;
+			case 'C':
+				pineTree->setPosition(32 * x, 32 * y + 16);
+				game.getRenderWindow()->draw(*pineTree);
+				break;
+			case 'B':
+				boulder->setPosition(32 * x, 32 * y + 16);
+				game.getRenderWindow()->draw(*boulder);
+				break;
+
 		}	
 	}
 	}
@@ -79,6 +90,8 @@ void map::generate()
 	for (int y = 0; y < MAP_SIZE_Y; y++){
 		int rand = std::rand() % 100;
 		if (rand > 90) world[x][y] = 'P';  //Plum
+		else if (rand > 85) world[x][y] = 'C';  //Connifer
+		else if (rand > 80) world[x][y] = 'B';  //Boulder
 		else  world[x][y] = 'G';	//Grass
 	}
 	}
