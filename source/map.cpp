@@ -170,6 +170,14 @@ char map::getCellData(int x, int y)
 	return world[x][y];
 
 }
+	
+void map::setCellData(int x, int y, char data)
+{
+	if (x < 0 || x >= MAP_SIZE_X || y < 0 || y >= MAP_SIZE_Y)
+		return;
+	world[x][y] = data;
+	
+}
 
 void map::work()
 {

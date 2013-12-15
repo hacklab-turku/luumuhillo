@@ -6,6 +6,7 @@
 #include <SFML/Window.hpp>
 #include "entity.hpp"
 #include "map.hpp"
+#include <random>
 
 Scene::Scene(std::string n)
 {
@@ -105,6 +106,13 @@ void Scene::handleInput(const sf::Event &e)
 		{
 		    case sf::Keyboard::G:
 				gameMap.setDrawGrid(!gameMap.getDrawGrid());
+				break;
+		    case sf::Keyboard::Space:
+				if(gameMap.getCellData(player->GetX(), player->GetY()) == MATURE_PLUM_TREE)
+				{
+					gameMap.setCellData(player->GetX(), player->GetY(), PLUM_TREE);
+					player->SetBlomCount(player->GetBlomCount() + std::rand() % 3 + 1);
+				}
 				break;
 
 		}
