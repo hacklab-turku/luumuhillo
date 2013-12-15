@@ -39,7 +39,7 @@ void Scene::init()
     initialized = true;
 
 	gameMap.generate();
-
+	gameMap.setDrawGrid(true);
     // For derps, play a sound
     game.getAudioHandler()->playsound("biisi");
 }
