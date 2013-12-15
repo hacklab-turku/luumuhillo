@@ -33,13 +33,16 @@ void map::render(ViewPtr view)
 	SpritePtr pineTree = game.getDataStorage()->getSprite("pineTree");
 	SpritePtr grass = game.getDataStorage()->getSprite("grass");
 	SpritePtr boulder = game.getDataStorage()->getSprite("boulder");
-
-
+	//render grass
 	for (int x = minX; x < maxX; x++){
 	for (int y = minY; y < maxY; y++){
-
 		grass->setPosition(32 * x, 32 * y);
 		game.getRenderWindow()->draw(*grass);
+	}
+	}
+	
+	for (int x = minX; x < maxX; x++){
+	for (int y = minY; y < maxY; y++){
 
 		switch (world[x][y]){
 			case PLUM_TREE:
@@ -59,8 +62,19 @@ void map::render(ViewPtr view)
 				game.getRenderWindow()->draw(*pineTree);
 				break;
 			case BOULDER:
-				boulder->setPosition(32 * x, 32 * y - 16);
-				game.getRenderWindow()->draw(*boulder);
+				if(((x<MAP_SIZE_X-1)&&world[x+1][y]==BOULDER) || (y>0&&world[x][y-1]==BOULDER))	//draw an additional boulder if one is nearby
+				{
+					boulder->setPosition(32 * x-8, 32 * y-16);
+					game.getRenderWindow()->draw(*boulder);
+					
+					boulder->setPosition(32 * x+8, 32 * y);
+					game.getRenderWindow()->draw(*boulder);
+				}
+				else
+				{
+					boulder->setPosition(32 * x, 32 * y);
+					game.getRenderWindow()->draw(*boulder);
+				}
 				break;
 
 		}	
@@ -109,7 +123,7 @@ void map::generate()
 
 }
 
-void map::genBoulders(int x, int y)
+void map::genBoulders(int x, int y)	//generate a wall of boulders
 {
 	while(1)
 	{
