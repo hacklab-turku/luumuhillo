@@ -10,9 +10,9 @@ public:
     Entity(std::string name, int x, int y);
     void Render(ViewPtr view);
     bool HandleInput();
-
-    void SetX(int x) { x_ = x; }
-    void SetY(int y) { y_ = y; }
+    
+    void SetX(int x) { x_ = x; drawX_ = x * 32;}
+    void SetY(int y) { y_ = y; drawY_ = y * 32;}
     void SetBlomCount(unsigned int blomcount) { blomCount_ = blomcount; }
 
     bool IsVisible() { return visible_; }

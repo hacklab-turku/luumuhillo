@@ -158,7 +158,7 @@ bool map::isSolid(int x, int y)
 	if (x < 0 || x >= MAP_SIZE_X || y < 0 || y >= MAP_SIZE_Y)
 		return true;
 	if(world[x][y]==BOULDER) return true; 
-	if(world[x][y]==PINE_TREE) return true;
+	//if(world[x][y]==PINE_TREE) return true;
 	return false;
 }
 
@@ -169,6 +169,14 @@ char map::getCellData(int x, int y)
 		return 'E'; //Off edge
 	return world[x][y];
 
+}
+	
+void map::setCellData(int x, int y, char data)
+{
+	if (x < 0 || x >= MAP_SIZE_X || y < 0 || y >= MAP_SIZE_Y)
+		return;
+	world[x][y] = data;
+	
 }
 
 void map::work()

@@ -6,6 +6,7 @@
 #include <SFML/Window.hpp>
 #include "entity.hpp"
 #include "map.hpp"
+#include <random>
 
 Scene::Scene(std::string n)
 {
@@ -29,9 +30,18 @@ void Scene::work()
     }
 	
     static int moveTime;
+	int lastX = player->GetX();
+	int lastY = player->GetY();	
+
     if(moveTime < scenetime){
-    if(player->HandleInput())
-	moveTime = scenetime + 5;
+  		if(player->HandleInput()){
+			moveTime = scenetime + 5;
+			if (gameMap.isSolid(player->GetX(), player->GetY())){
+				player->SetX(lastX);
+				player->SetY(lastY);
+
+			}
+		}
     } 
 
     gameMap.work();   //modify the map
@@ -105,6 +115,13 @@ void Scene::handleInput(const sf::Event &e)
 		{
 		    case sf::Keyboard::G:
 				gameMap.setDrawGrid(!gameMap.getDrawGrid());
+				break;
+		    case sf::Keyboard::Space:
+				if(gameMap.getCellData(player->GetX(), player->GetY()) == MATURE_PLUM_TREE)
+				{
+					gameMap.setCellData(player->GetX(), player->GetY(), PLUM_TREE);
+					player->SetBlomCount(player->GetBlomCount() + std::rand() % 3 + 1);
+				}
 				break;
 
 		}
