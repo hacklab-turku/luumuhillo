@@ -5,6 +5,10 @@
 #define MAP_SIZE_Y 512
 #include "typedefs.hpp"
 
+#define TREE_OFFSET		27
+#define SMALL_OFFSET		4
+#define PLAYER_OFFSET		0
+
 #define GRASS 			0
 #define PLUM_TREE 		1
 #define BLOOMING_PLUM_TREE 	2
