@@ -28,17 +28,17 @@ void Scene::work()
         (*iter)->setPosition(tempPos);
     }
 	
-	static int moveTime;
-	if(moveTime < scenetime){
-    	if(player->HandleInput())
-			moveTime = scenetime + 5;
-	}
+    static int moveTime;
+    if(moveTime < scenetime){
+    if(player->HandleInput())
+	moveTime = scenetime + 5;
+    } 
 
     gameMap.work();   //modify the map
-	gameMap.setDrawGrid(true);
+    gameMap.setDrawGrid(true);
 
-	gameGui.setPlayerPosition(player->GetX(), player->GetY());
-	gameGui.setScore(player->GetBlomCount());
+    gameGui.setPlayerPosition(player->GetX(), player->GetY());
+    gameGui.setScore(player->GetBlomCount());
 
 
     // Then render
@@ -52,9 +52,9 @@ void Scene::init()
     initialized = true;
 
     player = new Entity("luumunkeraaja", 0, 0);
-
-	gameMap.generate();
-	gameGui.init();
+ 
+    gameMap.generate();
+    gameGui.init();
 
     // For derps, play a sound
     game.getAudioHandler()->playsound("biisi");
@@ -62,11 +62,11 @@ void Scene::init()
 
 void Scene::render()
 {   
-	mainview->setCenter(player->GetX(), player->GetY());
+    mainview->setCenter(player->GetDrawX(), player->GetDrawY());
 
     game.getRenderWindow()->setView(*mainview);
 
-	gameMap.render(mainview);
+    gameMap.render(mainview);
     player->Render(mainview);
 
     // March through the graphics container and render graphics

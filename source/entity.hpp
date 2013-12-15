@@ -18,11 +18,15 @@ public:
     bool IsVisible() { return visible_; }
     int GetX() { return x_; }
     int GetY() { return y_; }
+    int GetDrawX() { return drawX_; }
+    int GetDrawY() { return drawY_; }
     unsigned int GetBlomCount() { return blomCount_; }
 
 private:
     int x_;
     int y_;
+    int drawX_;
+    int drawY_;
     int blomCount_;
     bool visible_;
     std::string name_;
