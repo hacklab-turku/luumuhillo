@@ -12,6 +12,8 @@
 *.la
 *.a
 
+*.creator.user
+
 CMakeFiles/
 CMakeCache.txt
 Makefile
