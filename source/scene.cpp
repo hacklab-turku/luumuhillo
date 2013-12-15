@@ -32,8 +32,8 @@ void Scene::work()
     player->HandleInput();
     gameMap.work();   //modify the map
 
-	gameGui.setPosition(23,4);
-	gameGui.setScore(9001);
+	gameGui.setPosition(player->GetX(), player->GetY());
+	gameGui.setScore(player->GetBlomCount());
 
 
     // Then render
