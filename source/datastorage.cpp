@@ -18,6 +18,7 @@ int DataStorage::loadInitialData()
     loadTextureAndStoreSprite("logo", "data/2D/engine_logo.png");
 	loadTextureAndStoreSprite("grass", "data/2D/ground.png");
 	loadTextureAndStoreSprite("plumTree", "data/2D/tree.png");
+	loadTextureAndStoreSprite("pineTree", "data/2D/pine.png");
 
     loadSound("biisi", "data/audio/biisi.ogg");
 
