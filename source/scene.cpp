@@ -37,7 +37,7 @@ void Scene::work()
     gameMap.work();   //modify the map
 	gameMap.setDrawGrid(true);
 
-	gameGui.setPosition(player->GetX(), player->GetY());
+	gameGui.setPlayerPosition(player->GetX(), player->GetY());
 	gameGui.setScore(player->GetBlomCount());
 
 
@@ -91,7 +91,7 @@ void Scene::render()
         game.getRenderWindow()->draw(*(*iter));
     }
 
-	gameGui.render();
+	gameGui.render(mainview);
 
 }
 

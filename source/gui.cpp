@@ -22,15 +22,19 @@ void gui::init()
 	score.setPosition(20,0);
 }
 
-void gui::render()
+void gui::render(ViewPtr view)
 {
-
+	position.setPosition(view->getCenter());
+	position.move(-500, -300);
 	game.getRenderWindow()->draw(position);
+	
+	score.setPosition(view->getCenter());
+	score.move(300, -300);
 	game.getRenderWindow()->draw(score);
 
 }
 
-void gui::setPosition(int x, int y)
+void gui::setPlayerPosition(int x, int y)
 {
     std::stringstream ss;
     ss << "Position: x:" << x << " y: " << y ;
