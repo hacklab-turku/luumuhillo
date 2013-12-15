@@ -20,6 +20,7 @@ public:
 private:
 	char world[MAP_SIZE_X][MAP_SIZE_Y];
 	bool drawGrid;
+	void genBoulders(int x, int y);
 
 };
 

@@ -96,12 +96,42 @@ void map::generate()
 		int rand = std::rand() % 100;
 		if (rand > 90) world[x][y] = 'P';  //Plum
 		else if (rand > 85) world[x][y] = 'C';  //Connifer
-		else if (rand > 80) world[x][y] = 'B';  //Boulder
-		else if (rand > 85) world[x][y] = 'M';  //mature Plum
+		else if (rand > 80) genBoulders(x,y);	//BoulderWORM!!!!
+		else if (rand > 75) world[x][y] = 'M';  //mature Plum
 		else  world[x][y] = 'G';	//Grass
 	}
 	}
 
+}
+
+void map::genBoulders(int x, int y)
+{
+	while(1)
+	{
+		world[x][y]='B';
+		int rand = std::rand() % 5;
+		switch(rand)
+		{
+			case 0:		//end the boulder wall
+				return;
+			case 1:
+				x++;
+				if(x>MAP_SIZE_X) return;
+				break;
+			case 2:
+				x--;
+				if(x<0) return;
+				break;
+			case 3:
+				y++;
+				if(y>MAP_SIZE_Y) return;
+				break;
+			case 4:
+				y--;
+				if(y<0) return;
+				break;
+		}
+	}
 }
 
 bool map::isSolid(int x, int y)
