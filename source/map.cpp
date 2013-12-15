@@ -46,7 +46,7 @@ void map::render(ViewPtr view)
 				game.getRenderWindow()->draw(*plumTree);
 				break;
 			case 'M':
-				maturePlumTree->setPosition(32 * x, 32 * y + 16);
+				maturePlumTree->setPosition(32 * x, 32 * y - 16);
 				game.getRenderWindow()->draw(*maturePlumTree);
 				break;
 			case 'C':
