@@ -18,6 +18,7 @@ void Server::init()
     starting_port_range = 16000;
 
     master_socket = UdpSocketPtr(new sf::UdpSocket());
+    master_socket->setBlocking(false);
 
     if (master_socket->bind(master_port) != sf::Socket::Status::Done)
     {
@@ -32,10 +33,10 @@ void Server::init()
 
 int Server::start()
 {
-    mainloop();
+    return mainloop();
 }
 
-void Server::mainloop()
+int Server::mainloop()
 {
     while (running)
     {
@@ -46,6 +47,7 @@ void Server::mainloop()
         process_requests();
         cleanup();
     }
+    return 0;
 }
 
 void Server::process_game()
@@ -55,6 +57,22 @@ void Server::process_game()
 
 void Server::process_requests()
 {
+    // Handle any connections that come to the master socket
+
+    char buffer[1024];
+    std::size_t received_count = 0;
+    sf::IpAddress sender;
+    unsigned short senderPort;
+
+    if (master_socket->receive(buffer, sizeof(buffer), received_count, sender, senderPort) != sf::Socket::Done)
+    {
+       //std::cout << "no news" << std::endl; 
+    }
+    else
+    {
+        std::cout << "news!!!!!!!!!" << std::endl;
+    }
+    
 }
 
 void Server::cleanup()

@@ -26,6 +26,7 @@ public:
 	void generate();
 	void work();
 	void setDrawGrid(bool draw) {drawGrid = draw;}
+	bool getDrawGrid() {return drawGrid;}
 
 
 private:

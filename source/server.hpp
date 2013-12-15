@@ -23,7 +23,7 @@ private:
 public:
     Server();
 
-    void mainloop();
+    int mainloop();
 
     void process_game();
     void process_requests();
