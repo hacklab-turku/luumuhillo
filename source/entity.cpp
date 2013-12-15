@@ -1,8 +1,10 @@
 #include "entity.hpp"
 #include "typedefs.hpp"
+#include <stdio.h>
+#include <string>
 
-Entity::Entity(int x, int y) {
-    //name_ = name;
+Entity::Entity(std::string name, int x, int y) {
+    name_ = name;
     x_ = x;
     y_ = y;
 

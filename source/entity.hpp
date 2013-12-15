@@ -1,10 +1,13 @@
+#include <string>
+#include "typedefs.hpp"
+
 #ifndef ENTITY_HPP
 #define ENTITY_HPP
 
 class Entity
 {
 public:
-    Entity(int x, int y);
+    Entity(std::string name, int x, int y);
     void SetX(int x) { x_ = x;}
     void SetY(int y) { y_ = y;}
     void SetBlomCount(unsigned int blomcount) { blomCount_ = blomcount; }
@@ -19,9 +22,9 @@ private:
     int y_;
     int blomCount_;
     bool visible_;
-    //string name_;
+    std::string name_;
 
-    //SpritePtr sprite_;
+    SpritePtr sprite_;
 };
 
 #endif // ENTITY_HPP
