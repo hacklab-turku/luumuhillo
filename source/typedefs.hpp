@@ -18,6 +18,8 @@ class Toolbox;
 class SceneHandler;
 class Scene;
 class Audio;
+class map;
+
 class Server;
 class ServerSocket;
 
