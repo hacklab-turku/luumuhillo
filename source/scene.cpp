@@ -4,6 +4,8 @@
 #include "toolbox.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+#include "entity.hpp"
+#include "map.hpp"
 
 Scene::Scene(std::string n)
 {
@@ -26,7 +28,13 @@ void Scene::work()
         (*iter)->setPosition(tempPos);
     }
 
+
+    player->HandleInput();
     gameMap.work();   //modify the map
+
+	gameGui.setPosition(23,4);
+	gameGui.setScore(9001);
+
 
     // Then render
     render();
@@ -38,8 +46,11 @@ void Scene::init()
     mainview = ViewPtr(new sf::View(sf::FloatRect(0, 0,  game.getResolution().y*aspect_ratio, game.getResolution().y)));
     initialized = true;
 
+    player = new Entity("luumunkeraaja", 10, 10);
+
 	gameMap.generate();
-	gameMap.setDrawGrid(true);
+	gameGui.init();
+
     // For derps, play a sound
     game.getAudioHandler()->playsound("biisi");
 }
@@ -49,6 +60,7 @@ void Scene::render()
     game.getRenderWindow()->setView(*mainview);
 
 	gameMap.render(mainview);
+    player->Render(mainview);
 
     // March through the graphics container and render graphics
     for (auto iter = graphics.begin(); iter != graphics.end(); iter++)
@@ -71,6 +83,9 @@ void Scene::render()
         }
         game.getRenderWindow()->draw(*(*iter));
     }
+
+	gameGui.render();
+
 }
 
 /**

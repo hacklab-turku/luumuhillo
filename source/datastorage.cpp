@@ -23,6 +23,8 @@ int DataStorage::loadInitialData()
 	loadTextureAndStoreSprite("pineTree", "data/2D/pine.png");
 	loadTextureAndStoreSprite("boulder", "data/2D/boulder.png");
 
+    loadTextureAndStoreSprite("player", "data/2D/man.png");
+
     loadSound("biisi", "data/audio/biisi.ogg");
 
     
