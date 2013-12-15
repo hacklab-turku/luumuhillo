@@ -28,7 +28,14 @@ void Scene::work()
         (*iter)->setPosition(tempPos);
     }
 
+<<<<<<< HEAD
     player->HandleInput();
+=======
+    gameMap.work();   //modify the map
+
+	gameGui.setPosition(23,4);
+	gameGui.setScore(9001);
+>>>>>>> 0eb9aba1b1a3ef8101f873da733d60ad00a35c6f
 
     // Then render
     render();
@@ -43,6 +50,7 @@ void Scene::init()
     player = new Entity("luumunkeraaja", 10, 10);
 
 	gameMap.generate();
+	gameGui.init();
 
     // For derps, play a sound
     game.getAudioHandler()->playsound("biisi");
@@ -76,6 +84,9 @@ void Scene::render()
         }
         game.getRenderWindow()->draw(*(*iter));
     }
+
+	gameGui.render();
+
 }
 
 /**

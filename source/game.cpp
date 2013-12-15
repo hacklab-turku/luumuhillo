@@ -6,6 +6,7 @@
 #include "scenehandler.hpp"
 #include "scene.hpp"
 #include "audio.hpp"
+#include "server.hpp"
 
 /**
 * Singleton instance on the game class
@@ -27,6 +28,7 @@ Game::Game()
     toolbox = ToolboxPtr(new Toolbox());
     scenehandler = SceneHandlerPtr(new SceneHandler());
     audiohandler = AudioPtr(new Audio());
+    server = ServerPtr(new Server());
 }
 
 /**
@@ -144,3 +146,5 @@ ToolboxPtr Game::getToolbox() { return toolbox; }
 DataStoragePtr Game::getDataStorage() { return datastorage; }
 SceneHandlerPtr Game::getSceneHandler() { return scenehandler; }
 AudioPtr Game::getAudioHandler() { return audiohandler; }
+ServerPtr Game::getServer() { return server; }
+
