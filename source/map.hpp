@@ -13,6 +13,7 @@ public:
 	char getCellData(int x, int y);
 	bool isSolid(int x, int y);
 	void generate();
+	void work();
 
 
 private:
