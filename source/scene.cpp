@@ -27,10 +27,15 @@ void Scene::work()
         tempPos.x = sin(((float)scenetime)*0.01)*10;
         (*iter)->setPosition(tempPos);
     }
+	
+	static int moveTime;
+	if(moveTime < scenetime){
+    	if(player->HandleInput())
+			moveTime = scenetime + 5;
+	}
 
-
-    player->HandleInput();
     gameMap.work();   //modify the map
+	gameMap.setDrawGrid(true);
 
 	gameGui.setPosition(player->GetX(), player->GetY());
 	gameGui.setScore(player->GetBlomCount());
@@ -46,7 +51,7 @@ void Scene::init()
     mainview = ViewPtr(new sf::View(sf::FloatRect(0, 0,  game.getResolution().y*aspect_ratio, game.getResolution().y)));
     initialized = true;
 
-    player = new Entity("luumunkeraaja", 10, 10);
+    player = new Entity("luumunkeraaja", 0, 0);
 
 	gameMap.generate();
 	gameGui.init();
@@ -57,6 +62,8 @@ void Scene::init()
 
 void Scene::render()
 {   
+	mainview->setCenter(player->GetX(), player->GetY());
+
     game.getRenderWindow()->setView(*mainview);
 
 	gameMap.render(mainview);
