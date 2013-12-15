@@ -30,9 +30,18 @@ void Scene::work()
     }
 	
     static int moveTime;
+	int lastX = player->GetX();
+	int lastY = player->GetY();	
+
     if(moveTime < scenetime){
-    if(player->HandleInput())
-	moveTime = scenetime + 5;
+  		if(player->HandleInput()){
+			moveTime = scenetime + 5;
+			if (gameMap.isSolid(player->GetX(), player->GetY())){
+				player->SetX(lastX);
+				player->SetY(lastY);
+
+			}
+		}
     } 
 
     gameMap.work();   //modify the map
