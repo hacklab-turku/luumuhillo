@@ -33,6 +33,8 @@ void map::render(ViewPtr view)
 	SpritePtr pineTree = game.getDataStorage()->getSprite("pineTree");
 	SpritePtr grass = game.getDataStorage()->getSprite("grass");
 	SpritePtr boulder = game.getDataStorage()->getSprite("boulder");
+	SpritePtr water = game.getDataStorage()->getSprite("water");
+
 	//render grass
 	for (int x = minX; x < maxX; x++){
 	for (int y = minY; y < maxY; y++){
@@ -76,6 +78,10 @@ void map::render(ViewPtr view)
 					game.getRenderWindow()->draw(*boulder);
 				}
 				break;
+			case WATER:
+				water->setPosition(32 * x, 32 * y);
+				game.getRenderWindow()->draw(*water);
+				break;
 
 		}	
 	}
@@ -117,6 +123,7 @@ void map::generate()
 		else if (rand > 85) world[x][y] = BLOOMING_PLUM_TREE;
 		else if (rand > 80) world[x][y] = PINE_TREE;
 		else if (rand > 75) genBoulders(x,y);
+		else if (rand > 70) genWater(x,y);
 		else  world[x][y] = GRASS;
 	}
 	}
@@ -153,12 +160,29 @@ void map::genBoulders(int x, int y)	//generate a wall of boulders
 	}
 }
 
+void map::genWater(int x, int y)
+{
+	int n;
+	for(n=0;n<2;n++)
+	{
+		world[x][y]=WATER;
+		if(x>0)world[x-1][y]=WATER;
+		if(x<MAP_SIZE_X-2)world[x+1][y]=WATER;
+		if(y>0)world[x][y-1]=WATER;
+		if(y<MAP_SIZE_Y-2)world[x][y+1]=WATER;
+
+		x+=(std::rand() % 3)-1;
+		y+=(std::rand() % 3)-1;
+		if(x<0||x>=MAP_SIZE_X||y<0||y>=MAP_SIZE_Y) return;
+	}
+}
+
 bool map::isSolid(int x, int y)
 {
 	if (x < 0 || x >= MAP_SIZE_X || y < 0 || y >= MAP_SIZE_Y)
 		return true;
 	if(world[x][y]==BOULDER) return true; 
-	if(world[x][y]==PINE_TREE) return true;
+	if(world[x][y]==WATER) return true;
 	return false;
 }
 
