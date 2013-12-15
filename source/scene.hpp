@@ -46,6 +46,8 @@ public:
     std::string getName();
     long long getTime();
     bool hasInitialized();
+
+	void handleInput(const sf::Event &e);
 };
 
 #endif

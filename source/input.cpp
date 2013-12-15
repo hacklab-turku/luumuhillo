@@ -42,8 +42,12 @@ void Input::handleinput()
                         game.signalGameExit();
                         break;
                 }
-            break;
+            	break;
         }
+
+		game.getSceneHandler()->getActiveScene()->handleInput(e);
+		break;
+
     }
 
     // Events for things like "X is constantly being pressed down"
