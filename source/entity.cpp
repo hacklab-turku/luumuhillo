@@ -22,25 +22,31 @@ void Entity::Render(ViewPtr view) {
     game.getRenderWindow()->draw(*sprite_);
 }
 
-void Entity::HandleInput() {
+bool Entity::HandleInput() {
+	bool didMove = false;
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
         x_ -= 32;
+		didMove = true;
         // What happens when X is constantly down
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
         x_ += 32;
+		didMove = true;
         // What happens when X is constantly down
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
         y_ -= 32;
+		didMove = true;
         // What happens when X is constantly down
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
         y_ += 32;
+		didMove = true;
         // What happens when X is constantly down
     }
+	return didMove;
 }

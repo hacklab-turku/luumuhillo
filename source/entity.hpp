@@ -9,7 +9,7 @@ class Entity
 public:
     Entity(std::string name, int x, int y);
     void Render(ViewPtr view);
-    void HandleInput();
+    bool HandleInput();
 
     void SetX(int x) { x_ = x; }
     void SetY(int y) { y_ = y; }
