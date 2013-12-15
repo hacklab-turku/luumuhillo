@@ -29,6 +29,8 @@ Game::Game()
     scenehandler = SceneHandlerPtr(new SceneHandler());
     audiohandler = AudioPtr(new Audio());
     server = ServerPtr(new Server());
+
+    clockMutex = MutexPtr(new std::mutex());
 }
 
 /**
@@ -87,7 +89,10 @@ int Game::loop()
 {
     if (isRunning())
     {
+        clockMutex->lock();
         gameRunningTime++;
+        clockMutex->unlock();
+
         gamestate = GameState::GameState_NewLoop;
 
         // Calculate FPS
@@ -148,5 +153,12 @@ DataStoragePtr Game::getDataStorage() { return datastorage; }
 SceneHandlerPtr Game::getSceneHandler() { return scenehandler; }
 AudioPtr Game::getAudioHandler() { return audiohandler; }
 ServerPtr Game::getServer() { return server; }
-long Game::getGameRunningTime() { return gameRunningTime; }
+long Game::getGameRunningTime()
+{
+    long out;
+    clockMutex->lock();
+    out = gameRunningTime;
+    clockMutex->unlock();
+    return out;
+}
 

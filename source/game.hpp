@@ -40,6 +40,8 @@ private:
     sf::Clock fps_clock;
     sf::Clock main_clock;
 
+    MutexPtr clockMutex;
+
 public:
     Game();
     int start();

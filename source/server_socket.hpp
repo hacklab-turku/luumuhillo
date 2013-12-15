@@ -12,6 +12,8 @@ private:
     bool finished;
 
     MutexPtr finishedMutex;
+    sf::IpAddress sender;
+    unsigned short senderPort;
 
 public:
     ServerSocket(int port);
