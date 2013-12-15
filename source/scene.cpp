@@ -28,6 +28,8 @@ void Scene::work()
         (*iter)->setPosition(tempPos);
     }
 
+    player->HandleInput();
+
     // Then render
     render();
 }
@@ -38,7 +40,7 @@ void Scene::init()
     mainview = ViewPtr(new sf::View(sf::FloatRect(0, 0,  game.getResolution().y*aspect_ratio, game.getResolution().y)));
     initialized = true;
 
-//    Entity player("luumunkeraaja", 10, 10);
+    player = new Entity("luumunkeraaja", 10, 10);
 
 	gameMap.generate();
 
@@ -51,7 +53,7 @@ void Scene::render()
     game.getRenderWindow()->setView(*mainview);
 
 	gameMap.render(mainview);
-//    player.Render(mainview);
+    player->Render(mainview);
 
     // March through the graphics container and render graphics
     for (auto iter = graphics.begin(); iter != graphics.end(); iter++)

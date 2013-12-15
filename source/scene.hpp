@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include "typedefs.hpp"
 #include "map.hpp"
+#include "entity.hpp"
 
 class Scene
 {
@@ -22,7 +23,11 @@ private:
     sf::Vector2f display_offset;
     float aspect_ratio;
 
+    map gameMap;
+    Entity *player;
+
     bool initialized;
+
 public:
     Scene(std::string n);
 

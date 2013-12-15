@@ -5,6 +5,7 @@
 #include "datastorage.hpp"
 #include "typedefs.hpp"
 #include "entity.hpp"
+#include "SFML/System.hpp"
 
 Entity::Entity(std::string name, int x, int y) {
     name_ = name;
@@ -17,6 +18,29 @@ Entity::Entity(std::string name, int x, int y) {
 }
 
 void Entity::Render(ViewPtr view) {
-    sprite_->setPosition(200, 200);
+    sprite_->setPosition(x_, y_);
     game.getRenderWindow()->draw(*sprite_);
+}
+
+void Entity::HandleInput() {
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+        x_ -= 32;
+        // What happens when X is constantly down
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+        x_ += 32;
+        // What happens when X is constantly down
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+        y_ -= 32;
+        // What happens when X is constantly down
+    }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+        y_ += 32;
+        // What happens when X is constantly down
+    }
 }

@@ -15,6 +15,7 @@ Input::Input()
 void Input::handleinput()
 {
     sf::Event e;
+
     while (game.getRenderWindow()->pollEvent(e))
     {
         switch (e.type)
@@ -46,8 +47,9 @@ void Input::handleinput()
     }
 
     // Events for things like "X is constantly being pressed down"
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::X))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
+        int i;
         // What happens when X is constantly down
     }
     else

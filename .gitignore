@@ -13,7 +13,14 @@
 *.a
 
 *.creator.user
+luumuhillo.config
+luumuhillo.creator
+luumuhillo.creator.user
+luumuhillo.files
+luumuhillo.includes
+*.autosave
 
+build/
 CMakeFiles/
 CMakeCache.txt
 Makefile

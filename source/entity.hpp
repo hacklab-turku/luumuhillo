@@ -1,5 +1,5 @@
-#include <string>
-#include "typedefs.hpp"
+//#include <string>
+//#include "typedefs.hpp"
 
 #ifndef ENTITY_HPP
 #define ENTITY_HPP
@@ -9,14 +9,15 @@ class Entity
 public:
     Entity(std::string name, int x, int y);
     void Render(ViewPtr view);
+    void HandleInput();
 
-    void SetX(int x) { x_ = x;}
-    void SetY(int y) { y_ = y;}
+    void SetX(int x) { x_ = x; }
+    void SetY(int y) { y_ = y; }
     void SetBlomCount(unsigned int blomcount) { blomCount_ = blomcount; }
 
     bool IsVisible() { return visible_; }
-    int GetX() { return x_;}
-    int GetY() { return y_;}
+    int GetX() { return x_; }
+    int GetY() { return y_; }
     unsigned int GetBlomCount() { return blomCount_; }
 
 private:
