@@ -15,6 +15,7 @@
 #define MATURE_PLUM_TREE	3
 #define BOULDER			4
 #define PINE_TREE		5
+#define WATER			6
 
 class map 
 {
@@ -34,6 +35,7 @@ private:
 	char world[MAP_SIZE_X][MAP_SIZE_Y];
 	bool drawGrid;
 	void genBoulders(int x, int y);
+	void genWater(int x, int y);
 
 };
 

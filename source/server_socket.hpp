@@ -12,6 +12,8 @@ private:
     bool finished;
 
     MutexPtr finishedMutex;
+    sf::IpAddress sender;
+    unsigned short senderPort;
 
 public:
     ServerSocket(int port);
@@ -20,6 +22,11 @@ public:
     bool getFinished();
     void service();
     void start();
+
+    void sendDeltas();
+
+    void join();
+
     void handleRequest();
     int getPort();
 };
