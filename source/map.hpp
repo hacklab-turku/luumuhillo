@@ -23,6 +23,7 @@ public:
 	map();
 	void render(ViewPtr view);
 	char getCellData(int x, int y);
+	void setCellData(int x, int y, char data);
 	bool isSolid(int x, int y);
 	void generate();
 	void work();

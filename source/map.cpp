@@ -123,7 +123,7 @@ void map::generate()
 		else if (rand > 85) world[x][y] = BLOOMING_PLUM_TREE;
 		else if (rand > 80) world[x][y] = PINE_TREE;
 		else if (rand > 75) genBoulders(x,y);
-		else if (rand > 70) genWater(x,y);
+		else if (rand > 74) genWater(x,y);
 		else  world[x][y] = GRASS;
 	}
 	}
@@ -134,6 +134,7 @@ void map::genBoulders(int x, int y)	//generate a wall of boulders
 {
 	while(1)
 	{
+		if(world[x][y]==WATER)	return;
 		world[x][y]=BOULDER;
 		int rand = std::rand() % 5;
 		switch(rand)
@@ -163,7 +164,7 @@ void map::genBoulders(int x, int y)	//generate a wall of boulders
 void map::genWater(int x, int y)
 {
 	int n;
-	for(n=0;n<2;n++)
+	for(n=0;n<7;n++)
 	{
 		world[x][y]=WATER;
 		if(x>0)world[x-1][y]=WATER;
@@ -171,8 +172,8 @@ void map::genWater(int x, int y)
 		if(y>0)world[x][y-1]=WATER;
 		if(y<MAP_SIZE_Y-2)world[x][y+1]=WATER;
 
-		x+=(std::rand() % 3)-1;
-		y+=(std::rand() % 3)-1;
+		x+=(std::rand() % 5)-2;
+		y+=(std::rand() % 5)-2;
 		if(x<0||x>=MAP_SIZE_X||y<0||y>=MAP_SIZE_Y) return;
 	}
 }
@@ -194,14 +195,26 @@ char map::getCellData(int x, int y)
 	return world[x][y];
 
 }
+	
+void map::setCellData(int x, int y, char data)
+{
+	if (x < 0 || x >= MAP_SIZE_X || y < 0 || y >= MAP_SIZE_Y)
+		return;
+	world[x][y] = data;
+	
+}
 
 void map::work()
 {
 	//mature a plum tree at a random location
-	int x = std::rand() % MAP_SIZE_X;
-	int y = std::rand() % MAP_SIZE_Y;
-	if(world[x][y]==BLOOMING_PLUM_TREE)
-		world[x][y] = MATURE_PLUM_TREE; 
+	int x, y;
+	for(int i=0;i<3;i++)
+	{
+		x = std::rand() % MAP_SIZE_X;
+		y = std::rand() % MAP_SIZE_Y;
+		if(world[x][y]==BLOOMING_PLUM_TREE)
+			world[x][y] = MATURE_PLUM_TREE; 
+	}
 	if(world[x][y]==PLUM_TREE)
 		world[x][y] = BLOOMING_PLUM_TREE;
 }

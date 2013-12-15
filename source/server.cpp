@@ -2,6 +2,7 @@
 #include "game.hpp"
 #include <iostream>
 #include "server_socket.hpp"
+#include "toolbox.hpp"
 
 Server::Server()
 {
@@ -9,14 +10,13 @@ Server::Server()
     checkDuration = 0;
     lastChecked = 0;
     running = true;
+    max_clients = 8;
+    master_port = 15000;
+    starting_port_range = 16000;
 }
 
 void Server::init()
 {
-    max_clients = 8;
-    master_port = 15000;
-    starting_port_range = 16000;
-
     master_socket = UdpSocketPtr(new sf::UdpSocket());
     master_socket->setBlocking(false);
 
@@ -25,10 +25,6 @@ void Server::init()
        std::cout << "!Server: Error opening master socket at port " << master_port << std::endl; 
     }
     std::cout << "#Server: Master socket up at port " << master_port << std::endl;
-
-    // test server socket creation with a dummy
-    openSocket();
-
 }
 
 int Server::start()
@@ -71,6 +67,20 @@ void Server::process_requests()
     else
     {
         std::cout << "news!!!!!!!!!" << std::endl;
+        std::string out = "";
+        int assignedPort = openSocket();
+        out = game.getToolbox()->intToString(assignedPort);
+        std::cout << "#Server: Assigned port " << assignedPort << " to client " << sender << std::endl;
+        char* outc = out.c_str();
+        std::cout << outc << std::endl;
+        if (master_socket->send(outc, sizeof(char)*out.size(), sender, senderPort) != sf::Socket::Done)
+        {
+            std::cout << "!Server: Could not transmit response" << std::endl;
+        }
+        else
+        {
+            std::cout << "#Server: Response sent to client" << std::endl;
+        }
     }
     
 }
@@ -112,6 +122,7 @@ int Server::openSocket()
     
     number_of_clients++;
     int next_port = starting_port_range + number_of_clients;
+    std::cout << "#Server: Next free port was: " << next_port << std::endl;
 
     ServerSocketPtr service_socket = ServerSocketPtr(new ServerSocket(next_port));    
 
@@ -120,6 +131,10 @@ int Server::openSocket()
     return startSocket(next_port);
 }
 
+/**
+* Launches a newly assigned socket and leaves it in its own thread
+* Returns the port number if successful, -1 if failure
+*/
 int Server::startSocket(int port)
 {
     auto s = std::find_if(sockets.begin(), sockets.end(),
@@ -130,7 +145,7 @@ int Server::startSocket(int port)
         return -1;
     }
     (*s)->start();
-    return 0;
+    return port;
 }
 
 void Server::checkFinishedSockets()
