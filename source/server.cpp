@@ -32,10 +32,10 @@ void Server::init()
 
 int Server::start()
 {
-    mainloop();
+    return mainloop();
 }
 
-void Server::mainloop()
+int Server::mainloop()
 {
     while (running)
     {
@@ -46,6 +46,7 @@ void Server::mainloop()
         process_requests();
         cleanup();
     }
+    return 0;
 }
 
 void Server::process_game()
@@ -55,6 +56,9 @@ void Server::process_game()
 
 void Server::process_requests()
 {
+    // Handle any connections that come to the master socket
+    
+    
 }
 
 void Server::cleanup()
