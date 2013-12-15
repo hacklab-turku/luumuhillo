@@ -32,6 +32,8 @@ private:
     unsigned int framerate;
     sf::Vector2i resolution;
 
+    long gameRunningTime;
+
 public:
     Game();
     int start();
@@ -52,6 +54,8 @@ public:
     SceneHandlerPtr getSceneHandler();
     AudioPtr getAudioHandler();
     ServerPtr getServer();
+
+    long getGameRunningTime();
 };
 
 extern Game game;
