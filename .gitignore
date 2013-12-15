@@ -26,3 +26,6 @@ CMakeCache.txt
 Makefile
 cmake_install.cmake
 game_project
+
+#some backup file?
+*.swp
