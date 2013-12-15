@@ -20,7 +20,7 @@ class SceneHandler;
 class Scene;
 class Audio;
 class map;
-
+class NetworkedInput;
 class Server;
 class ServerSocket;
 
@@ -35,6 +35,7 @@ typedef std::shared_ptr<Server> ServerPtr;
 typedef std::shared_ptr<ServerSocket> ServerSocketPtr;
 typedef std::shared_ptr<std::thread> ThreadPtr;
 typedef std::shared_ptr<std::mutex> MutexPtr;
+typedef std::shared_ptr<NetworkedInput> NetworkedInputPtr;
 
 // Typedef content classes
 typedef std::shared_ptr<sf::Sprite> SpritePtr;

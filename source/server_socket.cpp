@@ -2,6 +2,7 @@
 #include <iostream>
 #include "game.hpp"
 #include "server.hpp"
+#include "networked_input.hpp"
 
 ServerSocket::ServerSocket(int port)
 {
@@ -27,12 +28,12 @@ void ServerSocket::service()
     std::size_t received_count = 0;
     
 
-    int wait_duration = 1000;
+    int wait_duration = 100000;
     long wait_start = game.getGameRunningTime();
  
     bool got_response = false;
 
-    while (game.getGameRunningTime() < wait_start + wait_duration)
+    while ((game.getGameRunningTime() < wait_start + wait_duration) && !got_response)
     {
         if (socket->receive(buffer, sizeof(buffer), received_count, sender, senderPort) != sf::Socket::Done)
         {
@@ -68,8 +69,16 @@ void ServerSocket::service()
         }
         else
         {
-            std::cout << "#ServerThread: Client told us: " << buffer << std::endl;
-            if (buffer[0] == 'x')
+            std::cout << "#ServerThread: Client told us: " << buffer <<" first char: " << buffer[0] <<  std::endl;
+            if (buffer[0] == 'u')
+                game.getNetworkedInput()->up(service_port);
+            else if (buffer[0] == 'd')
+                game.getNetworkedInput()->down(service_port);
+            else if (buffer[0] == 'l')
+                game.getNetworkedInput()->left(service_port);
+            else if (buffer[0] == 'r')
+                game.getNetworkedInput()->right(service_port);
+            else if (buffer[0] == 'x')
                 reportFinished();
         }
 

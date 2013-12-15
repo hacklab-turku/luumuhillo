@@ -22,6 +22,7 @@ private:
     SceneHandlerPtr scenehandler;
     AudioPtr audiohandler;
     ServerPtr server;
+    NetworkedInputPtr networkedInput;
 
     // Game's current state
     GameState gamestate;
@@ -41,6 +42,7 @@ private:
     sf::Clock main_clock;
 
     MutexPtr clockMutex;
+    MutexPtr networked_input_mutex;
 
 public:
     Game();
@@ -63,6 +65,7 @@ public:
     SceneHandlerPtr getSceneHandler();
     AudioPtr getAudioHandler();
     ServerPtr getServer();
+    NetworkedInputPtr getNetworkedInput();
 
     long getGameRunningTime();
 };

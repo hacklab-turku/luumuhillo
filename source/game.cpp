@@ -7,6 +7,7 @@
 #include "scene.hpp"
 #include "audio.hpp"
 #include "server.hpp"
+#include "networked_input.hpp"
 
 /**
 * Singleton instance on the game class
@@ -29,8 +30,10 @@ Game::Game()
     scenehandler = SceneHandlerPtr(new SceneHandler());
     audiohandler = AudioPtr(new Audio());
     server = ServerPtr(new Server());
-
+    networkedInput = NetworkedInputPtr(new NetworkedInput());
+    
     clockMutex = MutexPtr(new std::mutex());
+    networked_input_mutex = MutexPtr(new std::mutex());
 }
 
 /**
@@ -161,4 +164,15 @@ long Game::getGameRunningTime()
     clockMutex->unlock();
     return out;
 }
+
+/**
+* Handles input coming through network
+*/
+NetworkedInputPtr Game::getNetworkedInput()
+{
+    return networkedInput;
+}
+
+
+
 
