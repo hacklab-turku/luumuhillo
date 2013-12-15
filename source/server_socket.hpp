@@ -6,12 +6,14 @@
 class ServerSocket
 {
 private:
-    int port;
+    int service_port;
     UdpSocketPtr socket;
 public:
-    ServerSocket();
+    ServerSocket(int port);
 
+    void start();
     void handleRequest();
+    int getPort();
 };
 
 #endif

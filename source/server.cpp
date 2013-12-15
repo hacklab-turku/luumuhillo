@@ -1,6 +1,7 @@
 #include "server.hpp"
 #include "game.hpp"
 #include <iostream>
+#include "server_socket.hpp"
 
 Server::Server()
 {
@@ -53,11 +54,25 @@ int Server::openSocket()
     }
     
     number_of_clients++;
-    int next_port = number_of_clients;
+    int next_port = starting_port_range + number_of_clients;
 
-    //sockets.push_back();
+    ServerSocketPtr service_socket = ServerSocketPtr(new ServerSocket(next_port));    
 
-    return -1; 
+    sockets.push_back(service_socket);
+    return startSocket(next_port);
+}
+
+int Server::startSocket(int port)
+{
+    auto s = std::find_if(sockets.begin(), sockets.end(),
+            [port](ServerSocketPtr so) { return so->getPort() == port; } );
+    if (s == sockets.end())
+    {
+        std::cout << "!Server: Can't start socket: Port not found in created sockets: " << port << std::endl;
+        return -1;
+    }
+    (*s)->start();
+    return 0;
 }
 
 std::string Server::giveMasterAddress()
@@ -69,6 +84,5 @@ int Server::giveMasterPort()
 {
     return master_port;
 }
-
 
 

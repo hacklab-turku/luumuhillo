@@ -4,6 +4,7 @@
 #include <memory>
 #include <vector>
 #include <string>
+#include <algorithm>
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
@@ -17,6 +18,7 @@ class SceneHandler;
 class Scene;
 class Audio;
 class Server;
+class ServerSocket;
 
 // Typedef manager classes
 typedef std::shared_ptr<ConfigReader> ConfigReaderPtr;
@@ -26,6 +28,7 @@ typedef std::shared_ptr<Toolbox> ToolboxPtr;
 typedef std::shared_ptr<SceneHandler> SceneHandlerPtr;
 typedef std::shared_ptr<Audio> AudioPtr;
 typedef std::shared_ptr<Server> ServerPtr;
+typedef std::shared_ptr<ServerSocket> ServerSocketPtr;
 
 // Typedef content classes
 typedef std::shared_ptr<sf::Sprite> SpritePtr;

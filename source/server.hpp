@@ -6,7 +6,7 @@
 class Server
 {
 private:
-    std::vector<UdpSocketPtr> sockets;
+    std::vector<ServerSocketPtr> sockets;
     unsigned int number_of_clients;
     unsigned int max_clients;
     std::string master_address;
@@ -20,6 +20,7 @@ public:
 
     void init();
     int openSocket();
+    int startSocket(int p);
     void closeSocket(int id);
     void handleRequest(char* req);
     std::string giveMasterAddress();
