@@ -7,12 +7,16 @@
 Server::Server()
 {
     number_of_clients = 0;
-    checkDuration = 0;
+    checkDuration = 200;
     lastChecked = 0;
     running = true;
     max_clients = 8;
     master_port = 15000;
     starting_port_range = 16000;
+
+    delta_mutex = MutexPtr(new std::mutex());
+    changed_mutex = MutexPtr(new std::mutex());
+
 }
 
 void Server::init()
@@ -90,6 +94,19 @@ void Server::cleanup()
     checkFinishedSockets();    
 }
 
+bool Server::stateHasChanged()
+{
+    changed_mutex->lock();
+    changed_mutex->unlock();
+}
+
+void Server::getDeltas()
+{
+    delta_mutex->lock();
+    delta_mutex->unlock();
+}
+
+
 void Server::handleRequest(char* data)
 {
 
@@ -153,18 +170,13 @@ void Server::checkFinishedSockets()
     if (game.getGameRunningTime() > lastChecked + checkDuration)
     {
         lastChecked = game.getGameRunningTime();
-        auto iter = sockets.begin();
-        while (iter != sockets.end())
+        auto iter = std::find_if(sockets.begin(), sockets.end(),
+            [](ServerSocketPtr s){ return s->getFinished(); });
+        if (iter != sockets.end())
         {
-            if ((*iter)->getFinished())
-            {
-                std::cout << "#Server: Cleaning socket at port " << (*iter)->getPort() << std::endl;
-                sockets.erase(iter++);
-            }
-            else
-            {
-                iter++;
-            }
+            std::cout << "#Server: Removed finished socket at port " << (*iter)->getPort() << std::endl;
+            (*iter)->join();
+            sockets.erase(iter);
         }
     }
 }

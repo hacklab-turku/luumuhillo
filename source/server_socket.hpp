@@ -22,6 +22,11 @@ public:
     bool getFinished();
     void service();
     void start();
+
+    void sendDeltas();
+
+    void join();
+
     void handleRequest();
     int getPort();
 };
