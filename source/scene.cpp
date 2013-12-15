@@ -28,6 +28,9 @@ void Scene::work()
 
     gameMap.work();   //modify the map
 
+	gameGui.setPosition(23,4);
+	gameGui.setScore(9001);
+
     // Then render
     render();
 }
@@ -39,6 +42,7 @@ void Scene::init()
     initialized = true;
 
 	gameMap.generate();
+	gameGui.init();
 
     // For derps, play a sound
     game.getAudioHandler()->playsound("biisi");
@@ -71,6 +75,9 @@ void Scene::render()
         }
         game.getRenderWindow()->draw(*(*iter));
     }
+
+	gameGui.render();
+
 }
 
 /**

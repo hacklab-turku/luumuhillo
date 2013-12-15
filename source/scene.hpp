@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include "typedefs.hpp"
 #include "map.hpp"
+#include "gui.hpp"
 
 class Scene
 {
@@ -23,6 +24,7 @@ private:
     float aspect_ratio;
 
 	map gameMap;
+	gui gameGui;
 
     bool initialized;
 public:
