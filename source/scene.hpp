@@ -28,7 +28,8 @@ private:
 
     map gameMap;
     Entity *player;
-	gui gameGui;
+	std::map<int, Entity*> networked_players;
+    gui gameGui;
 	bear angryBear;
 
     bool initialized;
