@@ -20,6 +20,9 @@ private:
 
     bool running;
 
+    MutexPtr delta_mutex;
+    MutexPtr changed_mutex;
+
 public:
     Server();
 
@@ -36,6 +39,10 @@ public:
     int startSocket(int p);
     void closeSocket(int id);
     void handleRequest(char* req);
+
+    bool stateHasChanged();
+    void getDeltas();
+
     std::string giveMasterAddress();
     int giveMasterPort();
 };

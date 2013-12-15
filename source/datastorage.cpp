@@ -22,7 +22,9 @@ int DataStorage::loadInitialData()
 	loadTextureAndStoreSprite("maturePlumTree", "data/2D/maturetree.png");
 	loadTextureAndStoreSprite("pineTree", "data/2D/pine.png");
 	loadTextureAndStoreSprite("boulder", "data/2D/boulder.png");
+	loadTextureAndStoreSprite("bear", "data/2D/bear.png");
 	loadTextureAndStoreSprite("water", "data/2D/water.png");
+
 
     loadTextureAndStoreSprite("player", "data/2D/man.png");
 
