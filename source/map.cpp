@@ -135,7 +135,7 @@ void map::genBoulders(int x, int y)	//generate a wall of boulders
 				return;
 			case 1:
 				x++;
-				if(x>MAP_SIZE_X) return;
+				if(x>=MAP_SIZE_X) return;
 				break;
 			case 2:
 				x--;
@@ -143,7 +143,7 @@ void map::genBoulders(int x, int y)	//generate a wall of boulders
 				break;
 			case 3:
 				y++;
-				if(y>MAP_SIZE_Y) return;
+				if(y>=MAP_SIZE_Y) return;
 				break;
 			case 4:
 				y--;
