@@ -28,6 +28,7 @@ void map::render(ViewPtr view)
 	if (maxY > MAP_SIZE_Y) maxY = MAP_SIZE_Y;
 
 	SpritePtr plumTree = game.getDataStorage()->getSprite("plumTree");
+	SpritePtr bloomingPlumTree = game.getDataStorage()->getSprite("bloomingPlumTree");
 	SpritePtr maturePlumTree = game.getDataStorage()->getSprite("maturePlumTree");
 	SpritePtr pineTree = game.getDataStorage()->getSprite("pineTree");
 	SpritePtr grass = game.getDataStorage()->getSprite("grass");
@@ -41,19 +42,23 @@ void map::render(ViewPtr view)
 		game.getRenderWindow()->draw(*grass);
 
 		switch (world[x][y]){
-			case 'P':
+			case PLUM_TREE:
 				plumTree->setPosition(32 * x, 32 * y - 16);
 				game.getRenderWindow()->draw(*plumTree);
 				break;
-			case 'M':
+			case BLOOMING_PLUM_TREE:
+				bloomingPlumTree->setPosition(32 * x, 32 * y - 16);
+				game.getRenderWindow()->draw(*bloomingPlumTree);
+				break;
+			case MATURE_PLUM_TREE:
 				maturePlumTree->setPosition(32 * x, 32 * y - 16);
 				game.getRenderWindow()->draw(*maturePlumTree);
 				break;
-			case 'C':
+			case PINE_TREE:
 				pineTree->setPosition(32 * x, 32 * y - 16);
 				game.getRenderWindow()->draw(*pineTree);
 				break;
-			case 'B':
+			case BOULDER:
 				boulder->setPosition(32 * x, 32 * y - 16);
 				game.getRenderWindow()->draw(*boulder);
 				break;
@@ -94,20 +99,52 @@ void map::generate()
 	for (int x = 0; x < MAP_SIZE_X; x++){
 	for (int y = 0; y < MAP_SIZE_Y; y++){
 		int rand = std::rand() % 100;
-		if (rand > 90) world[x][y] = 'P';  //Plum
-		else if (rand > 85) world[x][y] = 'C';  //Connifer
-		else if (rand > 80) world[x][y] = 'B';  //Boulder
-		else if (rand > 85) world[x][y] = 'M';  //mature Plum
-		else  world[x][y] = 'G';	//Grass
+		if (rand > 90) world[x][y] = PLUM_TREE;
+		else if (rand > 85) world[x][y] = BLOOMING_PLUM_TREE;
+		else if (rand > 80) world[x][y] = PINE_TREE;
+		else if (rand > 75) genBoulders(x,y);
+		else  world[x][y] = GRASS;
 	}
 	}
 
+}
+
+void map::genBoulders(int x, int y)
+{
+	while(1)
+	{
+		world[x][y]=BOULDER;
+		int rand = std::rand() % 5;
+		switch(rand)
+		{
+			case 0:		//end the boulder wall
+				return;
+			case 1:
+				x++;
+				if(x>MAP_SIZE_X) return;
+				break;
+			case 2:
+				x--;
+				if(x<0) return;
+				break;
+			case 3:
+				y++;
+				if(y>MAP_SIZE_Y) return;
+				break;
+			case 4:
+				y--;
+				if(y<0) return;
+				break;
+		}
+	}
 }
 
 bool map::isSolid(int x, int y)
 {
 	if (x < 0 || x > MAP_SIZE_X || y < 0 || y > MAP_SIZE_Y)
 		return true;
+	if(world[x][y]==BOULDER) return true; 
+	if(world[x][y]==PINE_TREE) return true;
 	return false;
 }
 
@@ -122,9 +159,11 @@ char map::getCellData(int x, int y)
 
 void map::work()
 {
-	//sprout "random" plum trees
+	//mature a plum tree at a random location
 	int x = std::rand() % MAP_SIZE_X;
 	int y = std::rand() % MAP_SIZE_Y;
-	if(world[x][y]=='P')
-		world[x][y] = 'M';
+	if(world[x][y]==BLOOMING_PLUM_TREE)
+		world[x][y] = MATURE_PLUM_TREE; 
+	if(world[x][y]==PLUM_TREE)
+		world[x][y] = BLOOMING_PLUM_TREE;
 }
