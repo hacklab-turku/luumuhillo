@@ -9,6 +9,7 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
 #include <thread>
+#include <mutex>
 
 // Avoid inclusion bugs by defining dummy classes
 class ConfigReader;
@@ -33,6 +34,7 @@ typedef std::shared_ptr<Audio> AudioPtr;
 typedef std::shared_ptr<Server> ServerPtr;
 typedef std::shared_ptr<ServerSocket> ServerSocketPtr;
 typedef std::shared_ptr<std::thread> ThreadPtr;
+typedef std::shared_ptr<std::mutex> MutexPtr;
 
 // Typedef content classes
 typedef std::shared_ptr<sf::Sprite> SpritePtr;
