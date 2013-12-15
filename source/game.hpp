@@ -34,11 +34,18 @@ private:
 
     long gameRunningTime;
 
+    int fps;
+    int nextFPS;
+
+    sf::Clock fps_clock;
+    sf::Clock main_clock;
+
 public:
     Game();
     int start();
     int exit();
-    int mainloop();
+
+    int loop();
 
     void loopend();
     bool isRunning();

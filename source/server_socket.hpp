@@ -9,9 +9,15 @@ private:
     int service_port;
     UdpSocketPtr socket;
     ThreadPtr socket_thread;
+    bool finished;
+
+    MutexPtr finishedMutex;
+
 public:
     ServerSocket(int port);
 
+    void reportFinished();
+    bool getFinished();
     void service();
     void start();
     void handleRequest();

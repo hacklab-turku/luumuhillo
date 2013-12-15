@@ -6,6 +6,9 @@
 Server::Server()
 {
     number_of_clients = 0;
+    checkDuration = 0;
+    lastChecked = 0;
+    running = true;
 }
 
 void Server::init()
@@ -25,6 +28,38 @@ void Server::init()
     // test server socket creation with a dummy
     openSocket();
 
+}
+
+int Server::start()
+{
+    mainloop();
+}
+
+void Server::mainloop()
+{
+    while (running)
+    {
+        if (game.isRunning())
+            process_game();
+        else
+            running = false;
+        process_requests();
+        cleanup();
+    }
+}
+
+void Server::process_game()
+{
+    game.loop();
+}
+
+void Server::process_requests()
+{
+}
+
+void Server::cleanup()
+{
+    checkFinishedSockets();    
 }
 
 void Server::handleRequest(char* data)
@@ -78,6 +113,27 @@ int Server::startSocket(int port)
     }
     (*s)->start();
     return 0;
+}
+
+void Server::checkFinishedSockets()
+{
+    if (game.getGameRunningTime() > lastChecked + checkDuration)
+    {
+        lastChecked = game.getGameRunningTime();
+        auto iter = sockets.begin();
+        while (iter != sockets.end())
+        {
+            if ((*iter)->getFinished())
+            {
+                std::cout << "#Server: Cleaning socket at port " << (*iter)->getPort() << std::endl;
+                sockets.erase(iter++);
+            }
+            else
+            {
+                iter++;
+            }
+        }
+    }
 }
 
 std::string Server::giveMasterAddress()

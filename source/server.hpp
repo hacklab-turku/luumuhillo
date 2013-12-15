@@ -15,10 +15,23 @@ private:
 
     UdpSocketPtr master_socket;
 
+    long lastChecked;
+    int checkDuration;
+
+    bool running;
+
 public:
     Server();
 
+    void mainloop();
+
+    void process_game();
+    void process_requests();
+    void cleanup();
+
     void init();
+    int start();
+    void checkFinishedSockets();
     int openSocket();
     int startSocket(int p);
     void closeSocket(int id);

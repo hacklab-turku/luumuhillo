@@ -1,4 +1,5 @@
 #include "game.hpp"
+#include "server.hpp"
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -9,7 +10,7 @@ int main(int argc, char** argv)
     if (game.start() != 0)
         return -1;
 
-    int retcode = game.mainloop();
+    int retcode = game.getServer()->start();
 
     if (retcode == 0)
     {

@@ -59,6 +59,14 @@ int Game::start()
         return -1;
 
     running = true;
+
+    // Timers for recording FPS
+    fps = 0;
+    nextFPS = 3;
+    gameRunningTime = 0;
+
+    server->init();
+
     return 0;
 }
 
@@ -75,19 +83,9 @@ int Game::exit()
     return 0;
 }
 
-int Game::mainloop()
+int Game::loop()
 {
-    // Timers for recording FPS
-    int fps = 0;
-    int nextFPS = 3;
-    sf::Clock fps_clock;
-    sf::Clock main_clock;
-    gameRunningTime = 0;
-
-    server->init();
-
-    // Enter main loop
-    while (isRunning())
+    if (isRunning())
     {
         gameRunningTime++;
         gamestate = GameState::GameState_NewLoop;
@@ -119,7 +117,6 @@ int Game::mainloop()
 
         loopend();
     }
-
     return 0;
 }
 
