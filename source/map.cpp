@@ -45,11 +45,11 @@ void map::render(ViewPtr view)
 				game.getRenderWindow()->draw(*plumTree);
 				break;
 			case 'C':
-				pineTree->setPosition(32 * x, 32 * y + 16);
+				pineTree->setPosition(32 * x, 32 * y - 16);
 				game.getRenderWindow()->draw(*pineTree);
 				break;
 			case 'B':
-				boulder->setPosition(32 * x, 32 * y + 16);
+				boulder->setPosition(32 * x, 32 * y - 16);
 				game.getRenderWindow()->draw(*boulder);
 				break;
 
