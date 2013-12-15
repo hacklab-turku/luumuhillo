@@ -21,6 +21,7 @@ private:
     ToolboxPtr toolbox;
     SceneHandlerPtr scenehandler;
     AudioPtr audiohandler;
+    ServerInfoPtr serverinfo;
 
     // Game's current state
     GameState gamestate;
@@ -50,6 +51,7 @@ public:
     RenderWindowPtr getRenderWindow();
     SceneHandlerPtr getSceneHandler();
     AudioPtr getAudioHandler();
+    ServerInfoPtr getServerInfo();
 };
 
 extern Game game;
