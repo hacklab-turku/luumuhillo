@@ -22,6 +22,9 @@ void Server::init()
     }
     std::cout << "#Server: Master socket up at port " << master_port << std::endl;
 
+    // test server socket creation with a dummy
+    openSocket();
+
 }
 
 void Server::handleRequest(char* data)
@@ -52,6 +55,7 @@ int Server::openSocket()
         std::cout << "!Server: Error opening new socket: out of sockets " << number_of_clients << "/" << max_clients << std::endl;
         return -1;
     }
+    std::cout << "#Server: Opening socket" << std::endl;
     
     number_of_clients++;
     int next_port = starting_port_range + number_of_clients;
@@ -59,6 +63,7 @@ int Server::openSocket()
     ServerSocketPtr service_socket = ServerSocketPtr(new ServerSocket(next_port));    
 
     sockets.push_back(service_socket);
+    std::cout << "#Server: Starting socket" << std::endl;
     return startSocket(next_port);
 }
 

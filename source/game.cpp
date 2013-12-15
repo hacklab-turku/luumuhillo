@@ -84,6 +84,8 @@ int Game::mainloop()
     sf::Clock main_clock;
     gameRunningTime = 0;
 
+    server->init();
+
     // Enter main loop
     while (isRunning())
     {

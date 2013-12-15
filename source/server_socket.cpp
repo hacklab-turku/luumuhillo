@@ -22,9 +22,8 @@ void ServerSocket::service()
 
 void ServerSocket::start()
 {
+    std::cout << "#ServerSocket: Launching thread" << std::endl;
     socket_thread = ThreadPtr(new std::thread(&ServerSocket::service, this));
-    socket_thread->join();
-     
 }
 
 void ServerSocket::handleRequest()
