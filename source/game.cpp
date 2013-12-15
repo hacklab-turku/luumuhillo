@@ -82,10 +82,12 @@ int Game::mainloop()
     int nextFPS = 3;
     sf::Clock fps_clock;
     sf::Clock main_clock;
+    gameRunningTime = 0;
 
     // Enter main loop
     while (isRunning())
     {
+        gameRunningTime++;
         gamestate = GameState::GameState_NewLoop;
 
         // Calculate FPS
@@ -147,4 +149,5 @@ DataStoragePtr Game::getDataStorage() { return datastorage; }
 SceneHandlerPtr Game::getSceneHandler() { return scenehandler; }
 AudioPtr Game::getAudioHandler() { return audiohandler; }
 ServerPtr Game::getServer() { return server; }
+long Game::getGameRunningTime() { return gameRunningTime; }
 

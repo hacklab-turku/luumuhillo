@@ -8,6 +8,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
+#include <thread>
 
 // Avoid inclusion bugs by defining dummy classes
 class ConfigReader;
@@ -29,6 +30,7 @@ typedef std::shared_ptr<SceneHandler> SceneHandlerPtr;
 typedef std::shared_ptr<Audio> AudioPtr;
 typedef std::shared_ptr<Server> ServerPtr;
 typedef std::shared_ptr<ServerSocket> ServerSocketPtr;
+typedef std::shared_ptr<std::thread> ThreadPtr;
 
 // Typedef content classes
 typedef std::shared_ptr<sf::Sprite> SpritePtr;
