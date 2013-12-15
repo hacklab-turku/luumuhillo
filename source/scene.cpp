@@ -35,12 +35,16 @@ void Scene::work()
     } 
 
     gameMap.work();   //modify the map
+<<<<<<< HEAD
     gameMap.setDrawGrid(true);
+=======
+>>>>>>> 3ba78d7c78f19562966b0c007d407bbc4cf5a517
 
     gameGui.setPlayerPosition(player->GetX(), player->GetY());
     gameGui.setScore(player->GetBlomCount());
 
 
+	
     // Then render
     render();
 }
@@ -94,6 +98,28 @@ void Scene::render()
 	gameGui.render(mainview);
 
 }
+
+
+void Scene::handleInput(const sf::Event &e)
+{   
+	if (e.type == sf::Event::KeyPressed)
+	{
+
+		switch (e.key.code)
+		{
+		    case sf::Keyboard::G:
+				gameMap.setDrawGrid(!gameMap.getDrawGrid());
+				break;
+
+		}
+	}
+
+}
+
+
+
+
+
 
 /**
 * Add some graphics to this scene
