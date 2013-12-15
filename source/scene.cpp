@@ -35,10 +35,6 @@ void Scene::work()
     } 
 
     gameMap.work();   //modify the map
-<<<<<<< HEAD
-    gameMap.setDrawGrid(true);
-=======
->>>>>>> 3ba78d7c78f19562966b0c007d407bbc4cf5a517
 
     gameGui.setPlayerPosition(player->GetX(), player->GetY());
     gameGui.setScore(player->GetBlomCount());
